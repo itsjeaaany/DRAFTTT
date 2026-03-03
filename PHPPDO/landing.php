@@ -84,7 +84,7 @@ if (isset($_GET['edit'])) {
   <td><?= $user['amount'] ?></td>
   <td>
     <a href="?edit=<?= $user['users_id'] ?>">Edit</a> |
-    <a href="?delete=<?= $user['users_id'] ?>">Delete</a>
+    <a href="delete.php?users_id=<?= htmlspecialchars($user['users_id']) ?>" onclick="return confirm('Are you sure?')">Delete</a>
   </td>
 </tr>
   <?php endforeach; ?>
