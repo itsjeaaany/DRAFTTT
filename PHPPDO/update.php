@@ -1,19 +1,25 @@
 <?php
 require 'config.php';
 
-if (isset($_POST['update'])){
-    $user_id = $_POST['user_id'];
+if (isset($_POST['update'])) {
+
+    $users_id = $_POST['users_id'];  // FIXED
     $name = $_POST['name'];
     $email = $_POST['email'];
     $product = $_POST['product'];
     $amount = $_POST['amount'];
 
-    $stmt = $pdo->prepare("UPDATE users SET name = ?, 
-    email = ? WHERE user_id = ?");
-    $stmt->execute([$name, $email, $user_id]);
+    $stmt = $pdo->prepare("UPDATE users 
+                           SET name = ?, email = ? 
+                           WHERE users_id = ?");
+    $stmt->execute([$name, $email, $users_id]);
 
-    $stmt2= $pdo->prepare("UPDATE orders SET product = ?,
-    email = ? WHERE user_id");
-    $stmt2->execute([$product, $amount, $user_id]);
+    $stmt2 = $pdo->prepare("UPDATE orders 
+                            SET product = ?, amount = ? 
+                            WHERE users_id = ?");
+    $stmt2->execute([$product, $amount, $users_id]);
+
+    header("Location: landing.php");
+    exit();
 }
 ?>
